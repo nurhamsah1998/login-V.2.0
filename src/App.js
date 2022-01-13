@@ -1,23 +1,18 @@
 import logo from './logo.svg';
-import './App.css';
+import Login from './component/Login';
+import Register from './component/Register';
+import { useState } from 'react';
+import { auth } from './firebase';
+import Dasbor from './component/Dasbor';
+import Auth from './component/Auth';
+import { useUserContext } from './context/userContext';
 
 function App() {
+  const { loading, eror, user } = useUserContext();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* {eror && <p className="error">{eror}</p>} */}
+      {loading ? <p>loading . . .</p> : <>{user ? <Dasbor /> : <Auth />}</>}
     </div>
   );
 }
